@@ -1,0 +1,23 @@
+<ion-view view-title="Awesome">
+  <ion-content on-drag-right="onGesture()">
+    <ion-slides options="options" slider="data.slider">
+      <ion-slide-page ng-repeat="news in allNews">
+        <img src="{{news.urlToImage}}" />
+        <h3 class="padding-left padding-right">{{news.title}}</h3>
+        <small class="padding-left" style="color:grey">{{news.publishedAt | date:'medium'}}</small>
+        <h4 class="padding" style="color:#787070">
+          {{news.description}}
+        </h4>
+        <small class="padding-left" style="color:rgba(128, 128, 128, 0.75)">{{news.author}}</small>
+
+        <ion-footer-bar class="bar bar-stable">
+          <a ng-href="{{news.url}}" onclick="window.open(this.href,'_self','location=no');" class="title">Read More</a>
+        </ion-footer-bar>
+      </ion-slide-page>
+    </ion-slides>
+  </ion-content>
+
+</ion-view>
+<script>
+
+</script>

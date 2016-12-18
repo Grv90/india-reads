@@ -1,0 +1,22 @@
+<ion-view view-title="Awesome">
+  <ion-content class="padding" on-drag-left="onGesture()">
+    <div class="dash">
+      <span class="ion-minus-round"></span>
+    </div>
+    <div class="source">
+      <p>
+        Suggested Sources
+      </p>
+    </div>
+    <div class="display-source">
+
+      <button ng-repeat="source in allSources" ng-click="fetchNews(source)" class="button button-outline button-positive">
+        {{source.name}}
+      </button>
+    </div>
+  </ion-content>
+</ion-view>
+
+<style>
+
+</style>
