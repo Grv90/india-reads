@@ -7,9 +7,22 @@
       <span class="ion-minus-round"></span>
     </div>
     <div class="source">
-     <p>
-       Version {{appVersion}}
-     </p>
+      <p>
+        Version {{appVersion}}
+      </p>
+      <div class="row">
+        <div class="col col-10">
+
+        </div>
+        <div class="col col-80">
+          <label class="item item-input">
+            <input type="text" ng-model="search" placeholder="Search Source">
+          </label>
+        </div>
+        <div class="col col-10">
+
+        </div>
+      </div>
       <p>
         Suggested Sources
       </p>
@@ -17,7 +30,8 @@
     </div>
     <div class="display-source">
 
-      <button ng-repeat="source in allSources" ng-click="fetchNews(source)" class="button button-outline button-positive">
+
+      <button ng-repeat="source in allSources |  filter:search" ng-click="fetchNews(source)" class="button button-outline button-positive">
         {{source.name}}
       </button>
     </div>

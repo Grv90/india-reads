@@ -28,9 +28,11 @@ body {
   font-weight: 400;
   font-style: normal;
   letter-spacing: 0.88px;
-  font-size: 16px;
+  font-size: 15px;
   text-align: -webkit-left;
 }
+
+
 .tabs-icon-left.tabs .tab-item, .tabs-icon-left > .tabs .tab-item, .tabs-icon-right.tabs .tab-item, .tabs-icon-right > .tabs .tab-item{
   color: black;
   font-size: small;
@@ -39,6 +41,14 @@ body {
 }
 .platform-android .action-sheet-cancel {
   display: block !important;
+}
+.imgSrc{
+  width: 250px;
+}
+.swiper-slide img {
+    width: auto;
+    height: 47%;
+    max-height: 70%;
 }
 body>div>div>div>div.action-sheet-group.action-sheet-options>div>div>div.col.col-80 {
   color: black;
@@ -157,6 +167,7 @@ div.spinner {
   color: #495ca0;
   font-size: 17px;
   font-weight: bolder;
+  padding-bottom: 0px;
   padding-left: 25px;
   font-family: Raleway;
   padding-right: 25px;

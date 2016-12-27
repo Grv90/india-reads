@@ -41,7 +41,7 @@ angular.module('starter.controllers', [])
 
 
 .controller('ContentCtrl', function($scope, $state, $ionicSlideBoxDelegate, Main, $cordovaInAppBrowser, $ionicActionSheet, $timeout,Socialshare) {
-
+  $scope.urls;
 
   $scope.allNews = Main.getProperty();
   if ($scope.allNews.length == 0) {
@@ -82,8 +82,6 @@ angular.module('starter.controllers', [])
         text: '<div class="row"><div class="col col-10"><span class="fa fa-facebook padding-left padding-right"></div><div class="col col-80">Faceebook</div></div> '
       }, {
         text: '<div class="row"><div class="col col-10"><span class="fa fa-twitter padding-left padding-right"></div><div class="col col-80">Twitter</div></div> '
-      },{
-        text: '<div class="row"><div class="col col-10"><span class="fa fa-whatsapp padding-left padding-right"></div><div class="col col-80"><a>WhatsApp</a></div></div> '
       }],
       cancelText: '<div class="row"><div class="col col-10"></div><div class="col-80">Cancel</div></div>',
       titleText: '<div class="row"><div class="col col-10"><span class="fa fa-share padding-left padding-right"></div><div class="col col-80">Share to </div></div> ',
@@ -110,14 +108,6 @@ angular.module('starter.controllers', [])
             }
           });
         }
-        if (index == 2 ) {
-          Socialshare.share({
-            'provider': 'whatsapp',
-            'attrs': {
-              'socialshare-url': object.url
-            }
-          });
-        }
         return true;
       }
     });
@@ -132,10 +122,10 @@ angular.module('starter.controllers', [])
 
 .controller('SelectedSourceCtrl', function($scope, $state, $ionicSlideBoxDelegate, Main,$cordovaAppVersion) {
 
-
-      $cordovaAppVersion.getVersionNumber().then(function (version) {
-        $scope.appVersion = version;
-      });
+  var vm = this;
+    //   $cordovaAppVersion.getVersionNumber().then(function(version) {
+    //   $scope.appVersion = version;
+    // });
 
 
   Main.allSources().then(function(respone) {

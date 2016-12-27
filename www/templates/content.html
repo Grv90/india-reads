@@ -5,7 +5,7 @@
   <ion-content on-swipe-left="onGesture()">
     <ion-slides options="options" slider="data.slider">
       <ion-slide-page ng-repeat="news in allNews.articles">
-        <img alt="Images not found, Select the Category again." src="{{news.urlToImage}}" />
+        <img class="img-responsive imgSrc" alt="Images not found, Select the Category again." src="{{news.urlToImage}}" />
         <div class="row">
           <div class="col col-50">
             <small class="padding-left sides">{{news.publishedAt | date:'medium'}} </small>
@@ -14,8 +14,8 @@
         <b><h3 class="newsTitle">{{news.title}}</h3></b>
 
         <div class="row">
-          <div class="col col-90">
-            <h4 class="padding desc-content">
+          <div class="col">
+            <h4 class="padding-left desc-content">
               {{news.description}}
             </h4>
           </div>
@@ -26,9 +26,10 @@
           <div class="col col-80">
             <small class="padding-left sides" style=" text-transform:capitalize;">Full Story <span class="source">{{allNews.source}}</span></small>
           </div>
-          <!-- <div class="col col-20">
-            <a ng-click="openShareDock(news)"><span class="fa fa-2x fa-share-alt padding-left share"></span></a>
-          </div> -->
+          <div class="col col-20">
+            <a class="tab-item" ng-href="{{news.url}}" onclick="window.open(this.href,'_self','location=no');">
+              <i class="">More..</i>
+            </a>          </div>
 
         </div>
 
@@ -38,25 +39,12 @@
             <a class="tab-item" ui-sref="sources">
               <i class=""></i> Category
             </a>
-            <a class="tab-item" ng-href="{{news.url}}" onclick="window.open(this.href,'_self','location=no');">
-              <i class=""></i> Full Story
-            </a>
+
             <a class="tab-item" ng-click="openShareDock(news)">
               <i class="icon ion-android-share"></i>
             </a>
           </div>
-          <!-- <div class="row">
-            <div class="col col-30">
-              <button class="btn">Category</button>
-            </div>
-            <div class="col col-30">
-              <button class="btn">Full Story</button>
 
-            </div>
-            <div class="col col-30">
-              <a ng-href="{{news.url}}" onclick="window.open(this.href,'_self','location=no');" class="title"><span class="fa fa-link"></span> Read More</a>
-            </div>
-          </div> -->
         </ion-footer-bar>
       </ion-slide-page>
     </ion-slides>
