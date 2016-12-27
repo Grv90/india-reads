@@ -5,12 +5,14 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','ngCordova'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'angular-loading-bar', '720kb.socialshare', 'ngCordova', 'ngCookies'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, $rootScope, $cookies,$cordovaAppVersion) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
+
+
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
       cordova.plugins.Keyboard.disableScroll(true);
@@ -21,6 +23,14 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
       StatusBar.styleDefault();
     }
   });
+
+
+  $rootScope.$on('$stateChangeStart', function($state, Main) {
+    if (angular.isUndefined($cookies.get('SIGNED_IN_USER'))) {
+      $state.go('content');
+    }
+  })
+
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
@@ -41,28 +51,31 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
   // Each tab has its own nav history stack:
 
   .state('tab.intro', {
-    url: '/intro',
-    views: {
-      'tab-dash': {
-        templateUrl: 'templates/intro.html',
-        controller: 'IntroCtrl'
+      url: '/intro',
+      views: {
+        'tab-dash': {
+          templateUrl: 'templates/intro.html',
+          controller: 'IntroCtrl'
+        }
+      },
+      onEnter: function($state, Main) {
+        if (Main.signedInUser() == true) {
+          $state.go('content');
+        }
       }
-    }
-  })
-
-  .state('content', {
+    })
+    .state('content', {
       url: '/content',
       templateUrl: 'templates/content.html',
       controller: 'ContentCtrl',
-       cache: false
-  })
-
-  .state('sources', {
+      cache: false
+    })
+    .state('sources', {
       url: '/sources',
       templateUrl: 'templates/sources.html',
       controller: 'SelectedSourceCtrl'
-  })
-// if none of the above states are matched, use this as the fallback
-$urlRouterProvider.otherwise('/tab/intro');
+    })
+    // if none of the above states are matched, use this as the fallback
+  $urlRouterProvider.otherwise('/tab/intro');
 
 });

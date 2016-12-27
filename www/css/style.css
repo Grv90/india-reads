@@ -7,12 +7,96 @@ body {
   height: 100%;
 }
 .slider-slide {
-  padding-top: 80px;
+  padding-top: 25px;
   color: #000;
   background-color: #fff;
   text-align: center;
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 300;
+}
+.desc {
+  padding-left: 20%;
+  padding-right: 20%;
+  font-family: Athiti;
+  color: black;
+  line-height: 26px;
+  font-size: 20px;
+}
+.desc-content {
+  color: #1e323c;
+  font-family: Raleway;
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: 0.88px;
+  font-size: 16px;
+  text-align: -webkit-left;
+}
+.tabs-icon-left.tabs .tab-item, .tabs-icon-left > .tabs .tab-item, .tabs-icon-right.tabs .tab-item, .tabs-icon-right > .tabs .tab-item{
+  color: black;
+  font-size: small;
+  font-weight: bold;
+  letter-spacing: 2.1px;
+}
+.platform-android .action-sheet-cancel {
+  display: block !important;
+}
+body>div>div>div>div.action-sheet-group.action-sheet-options>div>div>div.col.col-80 {
+  color: black;
+  font-family: Raleway;
+  font-weight: bolder;
+  letter-spacing: 1.2px;
+}
+body>div>div>div>div.action-sheet-group.action-sheet-options>button:nth-child(2)>div>div.col.col-80 {
+  color: black;
+  font-family: Raleway;
+  font-weight: bolder;
+  letter-spacing: 1.2px;
+}
+body>div>div>div>div.action-sheet-group.action-sheet-options>button:nth-child(3)>div>div.col.col-80 {
+  color: black;
+  font-family: Raleway;
+  font-weight: bolder;
+  letter-spacing: 1.2px;
+}
+body>div>div>div>div.action-sheet-group.action-sheet-options>button:nth-child(4)>div>div.col.col-80>a {
+  color: black;
+  font-family: Raleway;
+  font-weight: bolder;
+  letter-spacing: 1.2px;
+  text-decoration: none;
+}
+body>div>div>div>div.action-sheet-group.action-sheet-cancel>button>div>div.col-80 {
+  color: black;
+  font-family: Raleway;
+  font-weight: bolder;
+  letter-spacing: 1.2px;
+}
+body>div>div>div>div.action-sheet-group.action-sheet-options>div>div>div.col.col-10>span {
+  color: #f39c12
+}
+body>div>div>div>div.action-sheet-group.action-sheet-options>button:nth-child(2)>div>div.col.col-10>span {
+  color: #3B5998
+}
+body>div>div>div>div.action-sheet-group.action-sheet-options>button:nth-child(3)>div>div.col.col-10>span {
+  color: #0084b4
+}
+body>div>div>div>div.action-sheet-group.action-sheet-options>button:nth-child(4)>div>div.col.col-10>span {
+  color: green;
+}
+.sides {
+  color: #1e323c;
+  font-size: smaller;
+  font-family: Raleway;
+}
+.source{
+  color:#6842e5;
+  font-weight: bolder;
+}
+.head {
+  letter-spacing: 4px;
+  color: #f9d138;
+  font-weight: 900;
+  font-size: xx-large;
 }
 #logo {
   margin: 30px 0px;
@@ -45,20 +129,53 @@ ion-footer-bar>a {
 .dash {
   text-align: -webkit-center;
 }
-.dash span{
-  color:grey;
-}
-.source{
-  text-align: -webkit-center;s
-}
-.source p{
+.dash span {
   color: grey;
+}
+.source {
+  text-align: -webkit-center;
+  s
+}
+.source p {
+  color: grey;
+}
+div.spinner {
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 85px;
+  text-align: center;
+}
+.spinner svg {
+  width: 19% !important;
+  height: 85px !important;
+}
+.newsTitle {
+  color: #495ca0;
+  font-size: 17px;
+  font-weight: bolder;
+  padding-left: 25px;
+  font-family: Raleway;
+  padding-right: 25px;
+  letter-spacing: 0.8px;
+}
+body>ion-nav-view>div>ion-view>ion-content>div>ion-slides>div>div.swiper-wrapper>div.swiper-slide.swiper-slide-active>ion-footer-bar>a {
+  color: black;
+  font-size: 20px;
+  letter-spacing: 2px;
+  font-family: Raleway;
+  font-weight: 800;
 }
 .button.button-positive.button-outline {
   margin: 5px;
   border-radius: 19px;
-  font-size: small;
+  font-size: 17px;
+  letter-spacing: 1.2px;
 }
+.share {}
 // Called to navigate to the main app
 $scope.startApp=function() {
   $state.go('main');

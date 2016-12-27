@@ -6,6 +6,7 @@
     <title></title>
 
     <link rel="manifest" href="manifest.json">
+    <meta property="og:image" content="img/logo2.png" />
 
     <!-- un-comment this code to enable service worker
     <script>
@@ -15,8 +16,10 @@
           .catch(err => console.log('Error', err));
       }
     </script>-->
-
+  <link href="https://fonts.googleapis.com/css?family=Raleway|Roboto" rel="stylesheet">
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="lib/angular-loading-bar/build/loading-bar.css" rel="stylesheet" />
     <link href="css/style.css" rel="stylesheet">
 
     <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
@@ -30,6 +33,11 @@
     <!-- cordova script (this will be a 404 during development) -->
     <script src="lib/ngCordova/dist/ng-cordova.js"></script>
     <script src="cordova.js"></script>
+    <script src="lib/angular-loading-bar/build/loading-bar.min.js"></script>
+    <script src="lib/angular-socialshare/dist/angular-socialshare.js"></script>
+    <script src="lib/angular-cookies/angular-cookies.js"></script>
+
+
 
     <!-- your app's js -->
     <script src="js/app.js"></script>

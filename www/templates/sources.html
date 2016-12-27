@@ -1,12 +1,19 @@
 <ion-view view-title="Awesome">
-  <ion-content class="padding" on-drag-left="onGesture()">
+  <ion-content class="padding" on-swipe-right="onGesture()">
+    <div class="padding" style="text-align: -webkit-center;">
+      <img src="img/logo2.png">
+    </div>
     <div class="dash">
       <span class="ion-minus-round"></span>
     </div>
     <div class="source">
+     <p>
+       Version {{appVersion}}
+     </p>
       <p>
         Suggested Sources
       </p>
+
     </div>
     <div class="display-source">
 
@@ -14,6 +21,9 @@
         {{source.name}}
       </button>
     </div>
+    <p style="text-align:center">
+      Powered by <a href="https://newsapi.org/">NewsAPI.org</a>
+    </p>
   </ion-content>
 </ion-view>
 
