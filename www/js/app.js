@@ -27,7 +27,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 
   $rootScope.$on('$stateChangeStart', function($state, Main) {
     if (angular.isUndefined($cookies.get('SIGNED_IN_USER'))) {
-      $state.go('content');
+      $state.go('home');
     }
   })
 
@@ -68,6 +68,18 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       url: '/content',
       templateUrl: 'templates/content.html',
       controller: 'ContentCtrl',
+      cache: false
+    })
+    .state('home', {
+      url: '/home',
+      templateUrl: 'templates/home.html',
+      controller: 'HomeCtrl',
+      cache: false
+    })
+    .state('signup', {
+      url: '/signup',
+      templateUrl: 'templates/signup.html',
+      controller: 'SignupCtrl',
       cache: false
     })
     .state('sources', {

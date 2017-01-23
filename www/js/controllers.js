@@ -122,10 +122,10 @@ angular.module('starter.controllers', [])
 
 .controller('SelectedSourceCtrl', function($scope, $state, $ionicSlideBoxDelegate, Main,$cordovaAppVersion) {
 
-  var vm = this;
-    //   $cordovaAppVersion.getVersionNumber().then(function(version) {
-    //   $scope.appVersion = version;
-    // });
+  // var vm = this;
+  //     $cordovaAppVersion.getVersionNumber().then(function(version) {
+  //     $scope.appVersion = version;
+  //   });
 
 
   Main.allSources().then(function(respone) {
@@ -146,4 +146,72 @@ angular.module('starter.controllers', [])
       $state.go('content');
     })
   }
+})
+
+.controller('HomeCtrl', function($scope, $state, $ionicSlideBoxDelegate, Main,$cordovaAppVersion) {
+
+
+})
+.controller('SignupCtrl', function($scope, $state, $ionicSlideBoxDelegate, Main,$cordovaAppVersion,$cordovaCamera) {
+  $scope.profile=null;
+  $scope.takePicture = function() {
+    navigator.camera.getPicture(onSuccess, onFail,
+        {
+            sourceType : Camera.PictureSourceType.CAMERA,
+            correctOrientation: true,
+            quality: 75,
+            targetWidth: 200,
+            destinationType: Camera.DestinationType.DATA_URL,
+            encodingType: Camera.EncodingType.PNG,
+            saveToPhotoAlbum:false
+        });
+    function onSuccess(imageData) {
+        $scope.user.picture = "data:image/png;base64," + imageData;
+        $scope.$apply();
+    }
+
+    function onFail(message) {
+        if (appConstants.debug) {
+            alert('Failed because: ' + message);
+        }
+    }
+  //  var options = {
+  //      quality: 50,
+  //      destinationType: navigator.camera.DestinationType.FILE_URL,
+  //      sourceType: navigator.camera.PictureSourceType.CAMERA
+  //    };
+  //  $cordovaCamera.getPicture(options).then(
+  //  function(imageData) {
+  //    $scope.picData = imageData;
+  //    $scope.ftLoad = true;
+  //    $localstorage.set('fotoUp', imageData);
+  //    $ionicLoading.show({template: 'Foto acquisita...', duration:500});
+  //  },
+  //  function(err){
+  //    $ionicLoading.show({template: 'Errore di caricamento...', duration:500});
+  //    })
+   }
+
+ //   $scope.selectPicture = function() {
+ //   var options = {
+ //     quality: 50,
+ //     destinationType: Camera.DestinationType.FILE_URI,
+ //     sourceType: Camera.PictureSourceType.PHOTOLIBRARY
+ //   };
+ //
+ //   $cordovaCamera.getPicture(options).then(
+ //   function(imageURI) {
+ //     window.resolveLocalFileSystemURI(imageURI, function(fileEntry) {
+ //       $scope.picData = fileEntry.nativeURL;
+ //       $scope.ftLoad = true;
+ //       var image = document.getElementById('myImage');
+ //       image.src = fileEntry.nativeURL;
+ //       });
+ //     $ionicLoading.show({template: 'Foto acquisita...', duration:500});
+ //   },
+ //   function(err){
+ //     $ionicLoading.show({template: 'Errore di caricamento...', duration:500});
+ //   })
+ // };
+
 })
