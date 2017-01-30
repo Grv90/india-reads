@@ -1,7 +1,4 @@
 <ion-view view-title="Awesome">
-  <!-- <div class="spinner">
-    <ion-spinner icon="android"></ion-spinner>
-  </div> -->
   <ion-content on-swipe-left="onGesture()">
     <ion-slides options="options" slider="data.slider">
       <ion-slide-page ng-repeat="news in allNews.articles">
@@ -11,17 +8,14 @@
             <small class="padding-left sides">{{news.publishedAt | date:'medium'}} </small>
           </div>
         </div>
-        <b><h3 class="newsTitle">{{news.title}}</h3></b>
-
+        <b><h3 class="newsTitle" style="margin:0px">{{news.title}}</h3></b>
         <div class="row">
           <div class="col">
             <h4 class="padding-left desc-content">
               {{news.description}}
             </h4>
           </div>
-
         </div>
-
         <div class="row">
           <div class="col col-80">
             <small class="padding-left sides" style=" text-transform:capitalize;">Full Story <span class="source">{{allNews.source}}</span></small>
@@ -29,12 +23,11 @@
           <div class="col col-20">
             <a class="tab-item" ng-href="{{news.url}}" onclick="window.open(this.href,'_self','location=no');">
               <i class="">More..</i>
-            </a>          </div>
-
+            </a>
+          </div>
         </div>
-
-
-        <ion-footer-bar class="bar">
+        <!-- Commented the footer for the full news. -->
+        <!-- <ion-footer-bar class="bar">
           <div class="tabs tabs-icon-left">
             <a class="tab-item" ui-sref="sources">
               <i class=""></i> Category
@@ -43,12 +36,8 @@
               <i class="icon ion-android-share"></i>
             </a>
           </div>
-
-        </ion-footer-bar>
+        </ion-footer-bar> -->
       </ion-slide-page>
     </ion-slides>
   </ion-content>
-
 </ion-view>
-<script>
-</script>

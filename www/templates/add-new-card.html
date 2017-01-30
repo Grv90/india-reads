@@ -1,0 +1,46 @@
+<ion-content on-swipe-right="onSwipeRight()">
+  <div id="logo" style="text-align:center">
+    <a ng-click="takePicture()">
+      <img ng-if="newCard.photoUri==null" class="img-circle" src="img/upload-image.png">
+      <img ng-if="newCard.photoUri!=null" class="img-circle" ng-src="{{newCard.photoUri}}">
+    </a>
+  </div>
+  <div class="list">
+
+    <label class="item item-input item-stacked-label">
+      <span class="input-label">Title</span>
+      <input type="text" ng-model="newCard.title">
+    </label>
+    <label class="item item-input item-stacked-label">
+      <span class="input-label">content</span>
+      <textarea rows="5" ng-model="newCard.content"> </textarea>
+    </label>
+    <label class="item item-input item-stacked-label">
+      <h3><b>{{newCard.category.name}}</b></h3>
+      <h4>{{newCard.category.desc}}</h4>
+      <button class="button button-small button-positive"  has-search="true" modal-select="" ng-model="newCard.category" options="listOfCategories" modal-title="Select Category for Card">
+        <span ng-if="newCard.category==null">
+          Select Category
+        </span>
+        <span ng-if="newCard.category!=null">
+          Change Category
+        </span>
+        <div class="option">
+          <h3><b>{{option.name}}</b></h3>
+          <h4>{{option.desc}}</h4>
+        </div>
+      </button>
+      <button  class="button button-small button-positive">Add Category</button>
+    </label>
+  </div>
+  <div class="padding" style="text-align:center">
+    <button ng-click="addNewCard()" class="button button-outline button-positive">
+      Submit
+    </button>
+  </div>
+</ion-content>
+<style>
+  .img-circle {
+    width: 40%;
+  }
+</style>

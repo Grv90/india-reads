@@ -17,7 +17,7 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('IntroCtrl', function($scope, $state, $ionicSlideBoxDelegate,$cookies) {
+.controller('IntroCtrl', function($scope, $state, $ionicSlideBoxDelegate, $cookies) {
 
   // Called to navigate to the main app
   $scope.startApp = function() {
@@ -40,14 +40,14 @@ angular.module('starter.controllers', [])
 })
 
 
-.controller('ContentCtrl', function($scope, $state, $ionicSlideBoxDelegate, Main, $cordovaInAppBrowser, $ionicActionSheet, $timeout,Socialshare) {
+.controller('ContentCtrl', function($scope, $state, $ionicSlideBoxDelegate, Main, $cordovaInAppBrowser, $ionicActionSheet, $timeout, Socialshare) {
   $scope.urls;
 
   $scope.allNews = Main.getProperty();
   if ($scope.allNews.length == 0) {
     Main.all().then(function(response) {
       $scope.allNews = response.data;
-      $scope.allNews.source=response.data.source.replace(/-|\s/g," ");
+      $scope.allNews.source = response.data.source.replace(/-|\s/g, " ");
     })
   }
 
@@ -111,25 +111,23 @@ angular.module('starter.controllers', [])
         return true;
       }
     });
-
-
   }
-
-
-
   $scope.data = {};
 })
 
-.controller('SelectedSourceCtrl', function($scope, $state, $ionicSlideBoxDelegate, Main,$cordovaAppVersion) {
+.controller('SelectedSourceCtrl', function($scope, $state, $ionicSlideBoxDelegate, Main, $cordovaAppVersion) {
 
   // var vm = this;
   //     $cordovaAppVersion.getVersionNumber().then(function(version) {
   //     $scope.appVersion = version;
   //   });
 
+  $scope.isAuth = Main.getAll();
+
 
   Main.allSources().then(function(respone) {
     $scope.allSources = respone.data.sources;
+    console.log($scope.allSources);
   })
 
 
@@ -148,70 +146,155 @@ angular.module('starter.controllers', [])
   }
 })
 
-.controller('HomeCtrl', function($scope, $state, $ionicSlideBoxDelegate, Main,$cordovaAppVersion) {
+.controller('HomeCtrl', function($scope, $state, $ionicSlideBoxDelegate, Main, $cordovaAppVersion) {
 
 
-})
-.controller('SignupCtrl', function($scope, $state, $ionicSlideBoxDelegate, Main,$cordovaAppVersion,$cordovaCamera) {
-  $scope.profile=null;
-  $scope.takePicture = function() {
-    navigator.camera.getPicture(onSuccess, onFail,
-        {
-            sourceType : Camera.PictureSourceType.CAMERA,
-            correctOrientation: true,
-            quality: 75,
-            targetWidth: 200,
-            destinationType: Camera.DestinationType.DATA_URL,
-            encodingType: Camera.EncodingType.PNG,
-            saveToPhotoAlbum:false
-        });
-    function onSuccess(imageData) {
-        $scope.user.picture = "data:image/png;base64," + imageData;
-        $scope.$apply();
+  })
+  .controller('AddCtrl', function($cordovaToast, $scope, $state, $ionicSlideBoxDelegate, Main, Users, $cordovaAppVersion, $cordovaCamera) {
+    $scope.data = Main.getAll();
+    var userId = $scope.data[0].id;
+    $scope.newCard = {
+      "createdBy": userId,
+      "isPublished": true,
+      "createdDate": "",
+      "updatedDate": "",
+      "category": null,
+      "photoUri": null
     }
 
-    function onFail(message) {
-        if (appConstants.debug) {
-            alert('Failed because: ' + message);
+    $scope.takePicture = function() {
+      var options = {
+        quality: 60,
+        destinationType: Camera.DestinationType.DATA_URL,
+        sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+        allowEdit: false,
+        encodingType: Camera.EncodingType.JPEG,
+        targetWidth: 100,
+        targetHeight: 100,
+        popoverOptions: CameraPopoverOptions,
+        saveToPhotoAlbum: false
+      };
+      $cordovaCamera.getPicture(options).then(function(imageData) {
+        $scope.newCard.photoUri = "data:image/jpeg;base64," + imageData;
+
+      }, function(err) {
+        alert("Failed because: " + err);
+        console.log('Failed because: ' + err);
+      });
+
+    };
+
+    Users.fetchCategories().then(function(response) {
+      $scope.listOfCategories = response;
+    })
+
+    $scope.getOption = function(object) {
+      console.log(option.id);
+      return option.id;
+    }
+    $scope.onSwipeRight = function() {
+      $state.go('list-cards')
+    }
+    $scope.addNewCard = function() {
+      $scope.newCard.categoryId = $scope.newCard.category.id;
+      Users.addCard($scope.newCard).then(function(res) {
+          $cordovaToast.showLongCenter(res.success[0].fieldName);
+          $state.go('list-cards');
+        }),
+        function(response) {
+          $cordovaToast.showLongCenter(response.errors[0].fieldName);
+
         }
     }
-  //  var options = {
-  //      quality: 50,
-  //      destinationType: navigator.camera.DestinationType.FILE_URL,
-  //      sourceType: navigator.camera.PictureSourceType.CAMERA
-  //    };
-  //  $cordovaCamera.getPicture(options).then(
-  //  function(imageData) {
-  //    $scope.picData = imageData;
-  //    $scope.ftLoad = true;
-  //    $localstorage.set('fotoUp', imageData);
-  //    $ionicLoading.show({template: 'Foto acquisita...', duration:500});
-  //  },
-  //  function(err){
-  //    $ionicLoading.show({template: 'Errore di caricamento...', duration:500});
-  //    })
-   }
 
- //   $scope.selectPicture = function() {
- //   var options = {
- //     quality: 50,
- //     destinationType: Camera.DestinationType.FILE_URI,
- //     sourceType: Camera.PictureSourceType.PHOTOLIBRARY
- //   };
- //
- //   $cordovaCamera.getPicture(options).then(
- //   function(imageURI) {
- //     window.resolveLocalFileSystemURI(imageURI, function(fileEntry) {
- //       $scope.picData = fileEntry.nativeURL;
- //       $scope.ftLoad = true;
- //       var image = document.getElementById('myImage');
- //       image.src = fileEntry.nativeURL;
- //       });
- //     $ionicLoading.show({template: 'Foto acquisita...', duration:500});
- //   },
- //   function(err){
- //     $ionicLoading.show({template: 'Errore di caricamento...', duration:500});
- //   })
- // };
+  })
+  .controller('ListCtrl', function($cookies, $http, $scope, $state, Users, $ionicSlideBoxDelegate, Main, $cordovaAppVersion) {
+    $scope.data = Main.getAll();
+    var userId = $scope.data[0].id;
+    Users.getAllUsers().then(function(res) {
+      $scope.allUsers = res;
+    }, function(response) {});
 
-})
+    Users.getAllCards(userId).then(function(res) {
+      $scope.cardsList = res;
+    })
+
+    $scope.signout = function() {
+       Main.remove($scope.data[0]);
+      $state.go('sources');
+    }
+
+    $scope.onSwipeRight = function() {
+      $state.go('add-card');
+    }
+    $scope.onSwipeLeft = function() {
+      $state.go('sources');
+    }
+
+  })
+  .controller('SignupCtrl', function(ENDPOINT, $cookies, Users, $timeout, $http, $scope, $state, $ionicSlideBoxDelegate, Main, $cordovaAppVersion, $cordovaCamera, $ionicPopup, $cordovaToast) {
+    delete $http.defaults.headers.post['Content-Type'];
+    $scope.userSignIn = {
+      "username": "",
+      "password": ""
+    };
+    $scope.newUser = {
+      "profilePhotoUri": null,
+      "isActive": true,
+      "createdDate": new Date(),
+      "updatedDate": new Date(),
+      "type": "user"
+    }
+    $scope.takePicture = function() {
+      var options = {
+        quality: 50,
+        destinationType: Camera.DestinationType.DATA_URL,
+        sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+        allowEdit: false,
+        encodingType: Camera.EncodingType.JPEG,
+        targetWidth: 100,
+        targetHeight: 200,
+        popoverOptions: CameraPopoverOptions,
+        saveToPhotoAlbum: false
+      };
+      $cordovaCamera.getPicture(options).then(function(imageData) {
+        $scope.newUser.profilePhotoUri = "data:image/jpeg;base64," + imageData;
+
+      }, function(err) {
+        alert("Failed because: " + err);
+        console.log('Failed because: ' + err);
+      });
+
+    };
+
+    $scope.submit = function() {
+      if ($scope.newUser.password == $scope.newUser.confirmPassword && $scope.newUser.profilePhotoUri != null) {
+        Users.createUser($scope.newUser).then(function(response) {
+            $cordovaToast.showLongCenter(response.success[0].fieldName);
+            $state.go('login');
+          },
+          function(res) {
+            console.log(JSON.stringyfy(res));
+            $cordovaToast.showLongCenter(res.errors[0].fieldName);
+          })
+      } else {
+        if ($scope.newUser.profilePhotoUri == null)
+          $cordovaToast.showLongCenter("Please Upload the Profile Picture.");
+        else
+          $cordovaToast.showLongCenter("Password and Confirm password is not same.");
+      }
+    }
+
+    $scope.signIn = function() {
+      Users.userSignin($scope.userSignIn).then(function(response) {
+          // $cordovaToast.showLongCenter(response.success[0].fieldName);
+          Main.add(response);
+          $state.go('list-cards');
+        },
+        function(res) {
+          $cordovaToast.showLongCenter(res.errors[0].fieldName);
+        })
+
+    }
+
+  })

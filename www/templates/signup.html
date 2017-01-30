@@ -1,37 +1,53 @@
+<ion-content>
+  <div id="logo" style="text-align:center">
+    <a ng-click="takePicture()">
+      <img ng-if="newUser.profilePhotoUri==null" class="img-circle" src="img/upload-image.png">
+      <img ng-if="newUser.profilePhotoUri!=null" class="img-circle" ng-src="{{newUser.profilePhotoUri}}">
+    </a>
+  </div>
+  <div class="row text-center">
+    <div class="col">
+      <button ui-sref="login" class="button button-small button-clear button-positive">
+        Already Registered ?
+      </button>
+    </div>
+  </div>
 
-
-
-<div id="logo" style="text-align:center">
-<a ng-click="takePicture()">  <img ng-if="profile==null" class="img-circle" src="img/upload-image.png"></a>
-<a> <img ng-if="profile!=null" class="img-circle" src="{{profile}}"></a>
-</div>
-<div class="list padding">
-  <label class="item item-input item-stacked-label">
-    <span class="input-label">First Name</span>
-    <input type="text" placeholder="John">
-  </label>
-  <label class="item item-input item-stacked-label">
-    <span class="input-label">Last Name</span>
-    <input type="text" placeholder="Suhr">
-  </label>
-  <label class="item item-input item-stacked-label">
-    <span class="input-label">Email</span>
-    <input type="email" placeholder="john@suhr.com">
-  </label>
-  <label class="item item-input item-stacked-label">
-    <span class="input-label">Mobile</span>
-    <input type="text" placeholder="94884848498">
-  </label>
-</div>
-<div class="padding">
-  <button class="button button-block button-positive">
-    Submit
-  </button>
-</div>
-
+  <div class="list padding">
+    <label class="item item-input item-stacked-label">
+      <span class="input-label">First Name</span>
+      <input type="text" ng-model="newUser.firstName" placeholder="John">
+    </label>
+    <label class="item item-input item-stacked-label">
+      <span class="input-label">Last Name</span>
+      <input type="text" ng-model="newUser.lastName" placeholder="Suhr">
+    </label>
+    <label class="item item-input item-stacked-label">
+      <span class="input-label">Email</span>
+      <input type="email" ng-model="newUser.emailAddress" placeholder="john@suhr.com">
+    </label>
+    <label class="item item-input item-stacked-label">
+      <span class="input-label">Mobile</span>
+      <input type="number" max-length="10" ng-model="newUser.mobileNumber" placeholder="9481838686">
+    </label>
+    <label class="item item-input item-stacked-label">
+      <span class="input-label">Password</span>
+      <input type="password" ng-model="newUser.password" placeholder="Password">
+    </label>
+    <label class="item item-input item-stacked-label">
+      <span class="input-label">Confirm Password</span>
+      <input type="password" ng-model="newUser.confirmPassword" placeholder="Confirm Password">
+    </label>
+  </div>
+  <div class="padding text-center">
+    <button class="button  button-outline button-positive" ng-click="submit()">
+      Register
+    </button>
+  </div>
+</ion-content>
 <style>
-.img-circle{
-  width: 40%;
-  border-radius: 50%;
-}
+  .img-circle {
+    width: 40%;
+    border-radius: 50%;
+  }
 </style>

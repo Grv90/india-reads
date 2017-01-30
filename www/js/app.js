@@ -5,9 +5,9 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'angular-loading-bar', '720kb.socialshare', 'ngCordova', 'ngCookies'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'angular-loading-bar', '720kb.socialshare', 'ngCordova', 'ngCookies', 'starter.config', 'ngResource', 'ion-floating-menu','ngStorage','ionic-modal-select'])
 
-.run(function($ionicPlatform, $rootScope, $cookies,$cordovaAppVersion) {
+.run(function($ionicPlatform, $rootScope, $cookies, $cordovaAppVersion) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -33,7 +33,14 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 
 })
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
+
+  delete $httpProvider.defaults.headers.common['X-Requested-With'];
+
+  $httpProvider.defaults.headers.common = {};
+  $httpProvider.defaults.headers.post = {};
+  $httpProvider.defaults.headers.put = {};
+  $httpProvider.defaults.headers.patch = {}
 
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
@@ -75,11 +82,28 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       templateUrl: 'templates/home.html',
       controller: 'HomeCtrl',
       cache: false
+    }).state('login', {
+      url: '/login',
+      templateUrl: 'templates/login.html',
+      controller: 'SignupCtrl',
+      cache: false
     })
     .state('signup', {
       url: '/signup',
       templateUrl: 'templates/signup.html',
       controller: 'SignupCtrl',
+      cache: false
+    })
+    .state('list-cards', {
+      url: '/list',
+      templateUrl: 'templates/list-cards.html',
+      controller: 'ListCtrl',
+      cache: false
+    })
+    .state('add-card', {
+      url: '/add',
+      templateUrl: 'templates/add-new-card.html',
+      controller: 'AddCtrl',
       cache: false
     })
     .state('sources', {

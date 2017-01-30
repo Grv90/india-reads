@@ -1,0 +1,36 @@
+<ion-content on-swipe-left="onSwipeRight()" on-swipe-right="onSwipeLeft()">
+  <div class="item item-divider">
+    List of Cards <a ng-click="signout()" style="color:red" class="pull-right">Logout</a>
+  </div>
+  <div class="col center" style="text-align:center" ng-if="cardsList.length==0">
+    <button ui-sref="add-card" class="button button-outline button-positive">
+      Add New Card
+    </button>
+  </div>
+  <ion-item ng-if="cardsList.length!=0" ng-repeat="item in cardsList">
+    <div class="list">
+      <a class="item item-thumbnail-left" href="#">
+        <img src={{item.photoUri}}>
+        <h2>{{item.title}}</h2>
+        <p>{{item.content}}</p>
+      </a>
+    </div>
+  </ion-item>
+</ion-content>
+<style>
+  .item p {
+    -webkit-line-clamp: 10;
+  }
+
+  .center {
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+    position: absolute !important;
+    margin: 0 auto;
+    width: 100%;
+  }
+</style>

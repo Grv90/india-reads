@@ -30,15 +30,37 @@
     </div>
     <div class="display-source">
 
+      <span  ng-repeat="source in allSources |  filter:search">
+              <!-- <img src={{source.urlsToLogos.small}} style="width:20%" alt="..." />
+               <span class="caption post-content">
+                  <p>{{source.name}}</p>
+                </span> -->
 
-      <button ng-repeat="source in allSources |  filter:search" ng-click="fetchNews(source)" class="button button-outline button-positive">
-        {{source.name}}
-      </button>
+
+      <a class="padding" ng-click="fetchNews(source)">
+        <img  style="width:25%" src={{source.urlsToLogos.small}} />
+      </a>
+
+      <!-- <div class="list card">
+          <a  class="item item-icon-left" ng-click="fetchNews(source)">
+            <img  style="width:20px" src={{source.urlsToLogos.small}} />{{source.name}}
+          </a>
+        </div> -->
+      </span>
+
     </div>
     <p style="text-align:center">
       Powered by <a href="https://newsapi.org/">NewsAPI.org</a>
     </p>
+
   </ion-content>
+  <ion-floating-button ui-sref="add-card" has-footer="false" button-color="#2AC9AA" icon="ion-plus" iconColor="#fff">
+  </ion-floating-button>
+  <ion-floating-menu>
+      <ion-floating-item ng-if="isAuth.length!=0"  icon="ion-ios-photos-outline" ui-sref="list-cards"></ion-floating-item>
+    <ion-floating-item icon="ion-person" ui-sref="signup"></ion-floating-item>
+  </ion-floating-menu>
+
 </ion-view>
 
 <style>
